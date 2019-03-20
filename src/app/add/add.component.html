@@ -1,0 +1,39 @@
+<div class="col-md-6">
+  <h2 class="text-center">Create</h2>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input formControlName="name" placeholder="Name" name="name" class="form-control" id="name" [ngClass]="{'is-invalid':addForm.get('name').touched && addForm.get('name').invalid}" required="required">
+      <div *ngIf="addForm.get('name').touched && addForm.get('name').invalid">
+        <div *ngIf="addForm.get('name').errors.required">Name is required</div>
+        <div *ngIf="addForm.get('name').errors.minlength">Name  must be a letaset 4 charector</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input formControlName="email" placeholder="Email" name="email" class="form-control" id="email" [ngClass]="{'is-invalid':addForm.get('email').touched && addForm.get('email').invalid}" required="required" />
+      <div *ngIf="addForm.get('email').touched && addForm.get('email').invalid">
+        <div *ngIf="addForm.get('email').errors.required">Email Name is required</div>
+        <div *ngIf="addForm.get('email').errors.pattern">Email must be a valid email Address</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="birthday">Birthday:</label>
+      <input type="date" formControlName="birthday" placeholder="Birthday" name="birthday" class="form-control" id="birthday">
+    </div>
+
+
+    <div class="form-group">
+      <label>Gender:</label>
+      <div class="form-control">
+        <label class="radio-inline">
+          <input type="radio" value="male" name="gender" formControlName="gender">Male
+        </label>
+        <label class="radio-inline">
+          <input type="radio" value="female" name="gender" formControlName="gender" >Female
+        </label>
+      </div>
+    </div>
+    <button [disabled]="!addForm.valid" class="btn btn-success" >Create</button>
+  </form>
+</div>

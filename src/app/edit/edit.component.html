@@ -1,0 +1,39 @@
+<div class="col-md-6">
+  <h2 class="text-center">Edit</h2>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input formControlName="name" placeholder="Name" name="name" class="form-control" id="name" [ngClass]="{'is-invalid':editForm.get('name').touched && editForm.get('name').invalid}" required="required" />
+      <div *ngIf="editForm.get('name').touched && editForm.get('name').invalid">
+        <div *ngIf="editForm.get('name').errors.required">Name is required</div>
+        <div *ngIf="editForm.get('name').errors.minlength">Name  must be a letaset 4 charector</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input formControlName="email" placeholder="Email" name="email" class="form-control" id="email" [ngClass]="{'is-invalid':editForm.get('email').touched && editForm.get('email').invalid}" required="required" />
+      <div *ngIf="editForm.get('email').touched && editForm.get('email').invalid">
+        <div *ngIf="editForm.get('email').errors.required">Email Name is required</div>
+        <div *ngIf="editForm.get('email').errors.pattern">Email must be a valid email Address</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="birthday">Birthday:</label>
+      <input type="date" formControlName="birthday" placeholder="Birthday" name="birthday" class="form-control" id="birthday">
+    </div>
+
+
+    <div class="form-group">
+      <label>Gender:</label>
+      <div class="form-control">
+        <label class="radio-inline">
+          <input type="radio" value="male" name="gender" formControlName="gender">Male
+        </label>
+        <label class="radio-inline">
+          <input type="radio" value="female" name="gender" formControlName="gender" >Female
+        </label>
+      </div>
+    </div>
+    <button [disabled]="!editForm.valid"class="btn btn-success" >Save</button>
+  </form>
+</div>
