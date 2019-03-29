@@ -3,23 +3,26 @@
   <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name">Name:</label>
-      <input formControlName="name" placeholder="Name" name="name" class="form-control" id="name" [ngClass]="{'is-invalid':editForm.get('name').touched && editForm.get('name').invalid}" required="required" />
-      <div *ngIf="editForm.get('name').touched && editForm.get('name').invalid">
-        <div *ngIf="editForm.get('name').errors.required">Name is required</div>
-        <div *ngIf="editForm.get('name').errors.minlength">Name  must be a letaset 4 charector</div>
+      <input formControlName="name" placeholder="Name" name="name" class="form-control" id="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors}" >
+      <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+        <div *ngIf="f.name.errors.required">Name is required</div>
+        <div *ngIf="f.name.errors.minlength">Name  must be a letaset 4 charector</div>
       </div>
     </div>
     <div class="form-group">
       <label for="email">Email:</label>
-      <input formControlName="email" placeholder="Email" name="email" class="form-control" id="email" [ngClass]="{'is-invalid':editForm.get('email').touched && editForm.get('email').invalid}" required="required" />
-      <div *ngIf="editForm.get('email').touched && editForm.get('email').invalid">
-        <div *ngIf="editForm.get('email').errors.required">Email Name is required</div>
-        <div *ngIf="editForm.get('email').errors.pattern">Email must be a valid email Address</div>
+      <input formControlName="email" placeholder="Email" name="email" class="form-control" id="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors}">
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">Email Name is required</div>
+        <div *ngIf="f.email.errors.pattern">Email must be a valid email Address</div>
       </div>
     </div>
     <div class="form-group">
       <label for="birthday">Birthday:</label>
-      <input type="date" formControlName="birthday" placeholder="Birthday" name="birthday" class="form-control" id="birthday">
+      <input type="date" formControlName="birthday" placeholder="Birthday" name="birthday" class="form-control" id="birthday" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors}">
+      <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback">
+        <div *ngIf="f.birthday.errors.required"> Birthday is required</div>
+      </div>
     </div>
 
 
@@ -34,6 +37,6 @@
         </label>
       </div>
     </div>
-    <button [disabled]="!editForm.valid"class="btn btn-success" >Save</button>
+    <button class="btn btn-success" >Save</button>
   </form>
 </div>

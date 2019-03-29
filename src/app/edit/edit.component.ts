@@ -10,23 +10,18 @@ import {first} from 'rxjs/operators';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
+  submitted = false;
+  editForm: FormGroup;
+  get f() { return this.editForm.controls; }
 
   constructor(private formBuilder: FormBuilder, private router: Router, private employeeService: EmployeeService) { }
-  editForm = new FormGroup({
-    id: new FormControl(''),
-    name: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4)
-    ]),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.pattern('(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)')
-    ]),
-    birthday: new FormControl(''),
-    gender: new FormControl('')
-  });
-
   ngOnInit() {
+    this.editForm = this.formBuilder.group({
+      name: ['',[Validators.required, Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.pattern('(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)')]],
+      birthday: ['', Validators.required],
+      gender: ['', Validators.required]
+    })
     const employeeId = localStorage.getItem('editEmployeeId');
     if (!employeeId) {
       alert('Invalid action.');
@@ -39,6 +34,12 @@ export class EditComponent implements OnInit {
       });
   }
   onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.editForm.invalid) {
+      return;
+    }
     this.employeeService.editEmployee(this.editForm.value)
       .pipe(first())
       .subscribe(

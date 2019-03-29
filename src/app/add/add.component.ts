@@ -31,7 +31,7 @@ export class AddComponent implements OnInit {
   ngOnInit() {
     this.addForm = this.formBuilder.group({
       name: ['',[Validators.required, Validators.minLength(4)]],
-      email: ['', [Validators.required, Validators.pattern('^([\\w]*[\\w\\.]*(?!\\.)@gmail.com)')]],
+      email: ['', [Validators.required, Validators.pattern('(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)')]],
       birthday: ['', Validators.required],
       gender: ['', Validators.required]
     })
