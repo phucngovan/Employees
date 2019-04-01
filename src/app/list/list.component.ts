@@ -11,7 +11,11 @@ import {EmployeeService} from '../employee.service';
 export class ListComponent implements OnInit {
   employees: Employee[];
 
-  constructor(private router: Router, private employeeService: EmployeeService) { }
+  constructor(private router: Router, private employeeService: EmployeeService) {
+    // for (let i = 1; i <= 100; i++) {
+    //   this.employees.push(`item ${i}`);
+    // }
+  }
 
   ngOnInit() {
     this.employeeService.getEmployee().subscribe(data => { this.employees = data; });
