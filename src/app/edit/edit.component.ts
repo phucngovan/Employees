@@ -17,6 +17,7 @@ export class EditComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router, private employeeService: EmployeeService) { }
   ngOnInit() {
     this.editForm = this.formBuilder.group({
+      id: [''],
       name: ['',[Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.pattern('(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)')]],
       birthday: ['', Validators.required],

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Employee} from '../model/Employee';
 import {Router} from '@angular/router';
 import {EmployeeService} from '../employee.service';
@@ -12,11 +12,7 @@ export class ListComponent implements OnInit {
   employees: Employee[];
 
   constructor(private router: Router, private employeeService: EmployeeService) {
-    // for (let i = 1; i <= 100; i++) {
-    //   this.employees.push(`item ${i}`);
-    // }
   }
-
   ngOnInit() {
     this.employeeService.getEmployee().subscribe(data => { this.employees = data; });
   }
@@ -31,5 +27,4 @@ export class ListComponent implements OnInit {
     localStorage.setItem('editEmployeeId', employee.id.toString());
     this.router.navigate(['edit-employee']);
   }
-
 }

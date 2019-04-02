@@ -1,5 +1,9 @@
 <div class="col-md-6">
   <h2 class="text-center">Employees List</h2>
+  <div class="form-group has-search">
+    <span class="fa fa-search form-control-feedback"></span>
+  <input type="text" id="searchTextId" [(ngModel)]="searchText" name="searchText" placeholder="Search By Name">
+  </div>
   <form>
     <table class="table table-striped">
       <thead>
@@ -14,14 +18,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let employee of employees | paginate: { itemsPerPage: 5, currentPage: p }  ">
+      <tr *ngFor="let employee of employees | paginate: { itemsPerPage: 5, currentPage: p } | searByName: searchText">
         <td class="hidden">{{employee.id}}</td>
         <td>{{employee.name}}</td>
         <td>{{employee.email}}</td>
         <td>{{employee.birthday}}</td>
         <td>{{employee.gender}}</td>
         <td><button class="btn btn-danger" (click)="deleteEmployees(employee)">Delete</button></td>
-        <td><button class="btn btn-danger" (click)="editEmployees(employee)" style="background: fuchsia">Edit</button></td>
+        <td><button class="btn btn-danger" (click)="editEmployees(employee)" style="background: blue">Edit</button></td>
       </tr>
       </tbody>
     </table>
